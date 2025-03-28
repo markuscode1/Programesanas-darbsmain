@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datu vizualizācija</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Augšupielādēt CSV</a></li>
+            <li><a href="/data">Datu analīze</a></li>
+            <li><a href="/secinajumi">Secinājumi</a></li>
+        </ul>
+    </nav>
+
+    <h2>Datu vizualizācija histogrammās</h2>
+    {% if plot_productivity and plot_concentration and pie_chart_music_genres %}
+
+        <form method="get" action="/data">
+            <label for="dzimums">Filtrēt pēc dzimuma:</label>
+            <select name="dzimums">
+                <option value="">Visi</option>
+                {% for g in dzimumi %}
+                    <option value="{{ g }}" {% if request.args.get('dzimums') == g %}selected{% endif %}>{{ g }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filtrēt</button>
+        </form>
+
+        <div>
+            <h3>Produktivitātes vērtējums (bez mūzikas)</h3>
+            <p>Kā redzams histogrammā lielākā daļa respondentu savu produktivitāti vērtē kā vidēju, savukārt ievērojamai daļai ir augsta produktivitāte. Tomēr ir arī cilvēki, kuri bieži saskaras ar koncentrēšanās grūtībām, kas var ietekmēt viņu darba un mācību efektivitāti.</p>
+            {{ plot_productivity|safe }}
+        </div>
+
+        <div>
+            <h3>Mūzikas ietekme uz koncentrāciju</h3>
+            <p>ā redzams histogrammā, lielākā daļa respondentu norāda, ka mūzika pozitīvi ietekmē viņu koncentrēšanās spējas vai tām nav būtiskas ietekmes. Tomēr ir arī cilvēki, kuri uzskata, ka mūzika traucē koncentrēties, kas var ietekmēt viņu produktivitāti darbā vai mācībās.</p>
+            {{ plot_concentration|safe }}
+        </div>
+
+        <div class="chart-container">
+            <h3>Mūzikas žanru sadalījums</h3>
+            <p>Kā redzams diagrammā, lielākā daļa respondentu dod priekšroku popmūzikai, kas veido gandrīz pusi no visām izvēlēm. Populāri ir arī tādi žanri kā klasiskā mūzika, roks vai metāls un dažādi citi mūzikas stili. Tomēr ir novērojams, ka muzikālā gaume ir ļoti daudzveidīga, un daudzi respondenti izvēlas arī mazāk izplatītus žanrus, kas veido mazākas daļas diagrammā.</p>
+            {{ pie_chart_music_genres|safe }}
+        </div>
+
+        <form method="post" action="{{ url_for('clear_data') }}">
+            <button type="submit" onclick="return confirm('Vai tiešām vēlaties dzēst visus datus?');">Dzēst visus datus</button>
+        </form>
+    {% else %}
+        <p>Nav pieejami dati, lai izveidotu histogrammas. Lūdzu, augšupielādējiet .csv ar datiem!</p>
+    {% endif %}
+    
+</body>
+</html>

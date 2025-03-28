@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datu augšupielādē</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+            <li><a href="/">Augšupielādēt CSV</a></li>
+            <li><a href="/data">Datu analīze</a></li>
+            <li><a href="/secinajumi">Secinājumi</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+    <h1>Ka mūzikas klausīšanās ietekme darbu/mācīšanos</h1>
+    <p>Mūzika ir bijusi cilvēces sabiedrotais gadsimtiem ilgi – mēs to izmantojam, lai atslābinātos, motivētos vai uzlabotu savu garastāvokli. Tomēr vai mūzika tiešām palīdz koncentrēties un uzlabot mūsu produktivitāti? Vai tomēr tā traucē darbam un mācībām?</p>
+    <p>Šis jautājums ir īpaši aktuāls mūsdienu sabiedrībā, kur cilvēki bieži vien strādā vai mācās trokšņainā vidē, mēģinot koncentrēties uz uzdevumiem, kam nepieciešama pilnīga uzmanība. Daudzi izmanto mūziku kā rīku, lai uzlabotu savu produktivitāti, bet vai tiešām dažādi mūzikas žanri un skaņas līmeņi ietekmē mūsu spēju koncentrēties?</p>
+    <p>Apkopojot un analizējot datus no cilvēkiem, kuri izmanto mūziku darbā vai mācībās. Mēs vēlamies uzzināt, kādi mūzikas žanri tiek visbiežāk izmantoti dažādos darba un mācību kontekstos, kā arī kādi skaņas līmeņi palīdz vai traucē koncentrēšanos.</p>
+    <p>Mūsu mērķis ir iegūt skaidru priekšstatu par to, kā mūzika ietekmē cilvēku produktivitāti un koncentrēšanās spējas. Aptaujā piedalījušies dalībnieki, kuri dalījušies ar saviem mūzikas klausīšanās paradumiem, sniedzot vērtīgu informāciju par to, kā mūzika tiek izmantota dažādos ikdienas uzdevumos. Šī aptauja sniegs ieskatu par to, kā mūzikas žanri un to intensitāte var palīdzēt vai traucēt uzdevumu veikšanai.</p>
+</div>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <h2>Augšupielādē .csv failu</h2>
+        <input type="file" name="file" accept=".csv" required>
+        <button type="submit">Augšupielādēt</button>
+    </form>
+</body>
+</html>
